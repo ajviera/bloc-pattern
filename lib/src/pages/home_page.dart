@@ -14,8 +14,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   _authWithPass() async {
-    _showDialog();
-    _changeText();
+    bool result = await _showSelecctionPage();
+    if (result) {
+      _changeText();
+    }
   }
 
   Future<Null> authWithBiometric() async {
@@ -37,11 +39,13 @@ class _HomePageState extends State<HomePage> {
     bloc.sink.add(auth);
   }
 
-  _showDialog() async {
-    await showDialog<String>(
-      context: context,
-      builder: (_) => showHomeDialog(context),
+  Future<bool> _showSelecctionPage() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SelectionPage()),
     );
+    print("$result");
+    return result;
   }
 
   @override

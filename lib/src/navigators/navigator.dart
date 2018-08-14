@@ -1,12 +1,17 @@
 part of app;
 
-class LoginNavigator {
-  LoginNavigator({Key key, BuildContext context}) {
-    _navigate(context);
-  }
+class GeneralNavigator {
+  BuildContext context;
+  var page;
 
-  void _navigate(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => HomePage()));
+  GeneralNavigator(this.context, this.page);
+
+  Future<bool> navigate() async{
+    final result = await Navigator.push(
+      this.context,
+      MaterialPageRoute(builder: (context) => this.page),
+    );
+
+    return result;
   }
 }
