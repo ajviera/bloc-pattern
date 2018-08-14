@@ -1,9 +1,9 @@
 part of app;
 
 class Auth {
-  String authorized = 'Not Authorized';
+  bool authenticated = true;
 
-  void changeState(String state) {
-    this.authorized = state;
+  void changeState() {
+    this.authenticated = !authenticated;
   }
 }

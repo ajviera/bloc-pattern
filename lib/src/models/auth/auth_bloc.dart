@@ -2,17 +2,17 @@ part of app;
 
 class AuthBloc {
   final additionController = StreamController<Auth>();
-  final authController = StreamController<String>();
+  final authController = StreamController<bool>();
 
   Sink<Auth> get sink => additionController.sink;
-  Stream<String> get itemCount => authController.stream;
+  Stream<bool> get authState => authController.stream;
 
-  AuthBloc(Auth auth, String state) {
-    additionController.stream.listen(_onAdd(auth, state));
+  AuthBloc() {
+    additionController.stream.listen(onAdd);
   }
 
-  _onAdd(Auth auth, String state) {
-    auth.changeState(state);
-    authController.add(auth.authorized);
+  void onAdd(Auth auth) {
+    auth.changeState();
+    authController.add(auth.authenticated);
   }
 }

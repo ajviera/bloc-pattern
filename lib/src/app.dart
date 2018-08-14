@@ -10,6 +10,7 @@ part 'models/auth/auth_bloc.dart';
 part 'models/auth/auth_provider.dart';
 part 'pages/home_page.dart';
 part 'navigators/navigator.dart';
+part 'widgets/auth_stream_widget.dart';
 part 'widgets/system_padding_widget.dart';
 part 'widgets/home_dialog_widget.dart';
 

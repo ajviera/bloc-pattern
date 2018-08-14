@@ -1,15 +1,15 @@
 part of app;
 
-class CountBlocProvider extends InheritedWidget {
+class AuthBlocProvider extends InheritedWidget {
   final AuthBloc bloc;
   final Widget child;
-  CountBlocProvider({
+  AuthBlocProvider({
     this.bloc,
     this.child,
   }) : super(child: child);
 
-  static CountBlocProvider of(BuildContext context) =>
-      context.inheritFromWidgetOfExactType(CountBlocProvider);
+  static AuthBlocProvider of(BuildContext context) =>
+      context.inheritFromWidgetOfExactType(AuthBlocProvider);
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return true;

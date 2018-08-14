@@ -6,9 +6,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static Auth auth = Auth();
-  AuthBloc bloc = AuthBloc(auth, auth.authorized);
-  bool authenticated = false;
+  Auth auth = Auth();
+  AuthBloc bloc = AuthBloc();
 
   _authenticate() async {
     await authWithBiometric();
@@ -16,13 +15,12 @@ class _HomePageState extends State<HomePage> {
 
   _authWithPass() async {
     _showDialog();
-    authenticated = true;
     _changeText();
   }
 
   Future<Null> authWithBiometric() async {
     try {
-      authenticated = await LocalAuthentication().authenticateWithBiometrics(
+      await LocalAuthentication().authenticateWithBiometrics(
         localizedReason: 'Scan your fingerprint to authenticate',
         useErrorDialogs: true,
       );
@@ -36,11 +34,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _changeText() {
-    setState(
-      () {
-        bloc.sink.add(auth);
-      },
-    );
+    bloc.sink.add(auth);
   }
 
   _showDialog() async {
@@ -52,28 +46,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CountBlocProvider(
+    return AuthBlocProvider(
       bloc: bloc,
       child: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(
-              'Current State: ${auth.authorized}\n',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            Container(
-              height: 50.0,
-              width: 150.0,
-              child: RaisedButton(
-                elevation: 9.0,
-                child: const Text('Authenticate'),
-                onPressed: () => _authenticate(),
-              ),
-            ),
+            AuthStream(),
+            buildRaiseButton(),
           ],
         ),
+      ),
+    );
+  }
+
+  Container buildRaiseButton() {
+    return Container(
+      height: 50.0,
+      width: 150.0,
+      child: RaisedButton(
+        elevation: 9.0,
+        child: const Text('Authenticate'),
+        onPressed: () => _authenticate(),
       ),
     );
   }
