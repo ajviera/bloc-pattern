@@ -17,7 +17,7 @@ part 'widgets/system_padding_widget.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String _title = 'Auth Example';
+    String _title = 'Bloc & Local Auth Example';
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

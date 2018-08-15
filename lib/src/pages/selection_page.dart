@@ -3,32 +3,45 @@ part of app;
 class SelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Pick an option'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: TextField(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+      },
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
                 autofocus: true,
                 decoration: InputDecoration(
-                    labelText: 'Full Name', hintText: 'eg. John Smith'),
+                  labelText: 'Full Name',
+                  hintText: 'eg. Cosme Fulanito',
+                ),
               ),
-            ),
-            flatButton(context, Text('CANCEL'), false),
-            flatButton(context, Text('OPEN'), true)
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 100.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    flatButton(context, Text('Cancel'), Icons.cancel, false),
+                    flatButton(context, Text('Confirm'), Icons.done, true)
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  flatButton(BuildContext context, Text text, bool value) {
-    return FlatButton(
-      child: text,
+  flatButton(BuildContext context, Text text, IconData icon, bool value) {
+    return FlatButton.icon(
+      label: text,
+      icon: Icon(icon),
       onPressed: () {
         Navigator.pop(context, value);
       },

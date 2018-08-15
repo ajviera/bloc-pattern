@@ -15,19 +15,17 @@ class _HomePageState extends State<HomePage> {
 
   _authWithPass() async {
     bool result = await _showSelecctionPage();
-    if (result) {
-      _changeText();
-    }
+    _changeText(result);
   }
 
   Future<Null> authWithBiometric() async {
     try {
-      await LocalAuthentication().authenticateWithBiometrics(
+      bool result = await LocalAuthentication().authenticateWithBiometrics(
         localizedReason: 'Scan your fingerprint to authenticate',
         useErrorDialogs: true,
       );
 
-      _changeText();
+      _changeText(result);
     } on PlatformException catch (e) {
       print(e);
       _authWithPass();
@@ -35,8 +33,10 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
   }
 
-  _changeText() {
-    bloc.sink.add(auth);
+  _changeText(bool result) {
+    if (result) {
+      bloc.sink.add(auth);
+    }
   }
 
   Future<bool> _showSelecctionPage() async {
@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(builder: (context) => SelectionPage()),
     );
-    print("$result");
     return result;
   }
 
