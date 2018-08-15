@@ -9,30 +9,34 @@ class SelectionPage extends StatelessWidget {
         SystemChannels.textInput.invokeMethod('TextInput.hide');
       },
       child: Center(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                autofocus: true,
-                decoration: InputDecoration(
-                  labelText: 'Full Name',
-                  hintText: 'eg. Cosme Fulanito',
-                ),
+        child: ListView(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.only(top: 150.0, left: 20.0, right: 20.0),
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: 'Full Name',
+                      hintText: 'eg. Cosme Fulanito',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 100.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        flatButton(
+                            context, Text('Cancel'), Icons.cancel, false),
+                        flatButton(context, Text('Confirm'), Icons.done, true)
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    flatButton(context, Text('Cancel'), Icons.cancel, false),
-                    flatButton(context, Text('Confirm'), Icons.done, true)
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
