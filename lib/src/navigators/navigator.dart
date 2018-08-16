@@ -7,7 +7,7 @@ class GeneralNavigator {
   GeneralNavigator(this.context, this.page);
 
   Future<bool> navigate() async{
-    final result = await Navigator.push(
+    final bool result = await Navigator.push(
       this.context,
       MaterialPageRoute(builder: (context) => this.page),
     );

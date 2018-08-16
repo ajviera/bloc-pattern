@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   local_auth: ^0.2.1
+  rxdart: ^0.18.1
   cupertino_icons: ^0.1.2
 
 dev_dependencies:

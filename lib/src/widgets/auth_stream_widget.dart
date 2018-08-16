@@ -8,7 +8,7 @@ class AuthStream extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthBloc bloc = AuthBlocProvider.of(context).bloc;
     return StreamBuilder<bool>(
-      stream: bloc.authState,
+      stream: bloc.isLoading,
       initialData: true,
       builder: (context, snapshot) => Text(
             "Current State: ${snapshot.data ? authorized : notAuthorized}",

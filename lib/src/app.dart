@@ -4,10 +4,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:rxdart/rxdart.dart';
 
-part 'models/auth/auth.dart';
-part 'models/auth/auth_bloc.dart';
-part 'models/auth/auth_provider.dart';
+part 'blocs/auth/auth_bloc.dart';
+part 'blocs/auth/auth_provider.dart';
 part 'pages/home_page.dart';
 part 'pages/selection_page.dart';
 part 'navigators/navigator.dart';

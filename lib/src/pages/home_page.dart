@@ -6,7 +6,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Auth auth = Auth();
   AuthBloc bloc = AuthBloc();
 
   _authenticate() async {
@@ -34,16 +33,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   _changeText(bool result) {
-    if (result) {
-      bloc.sink.add(auth);
-    }
+    bloc.changeAuthState(result == null ? false : result);
   }
 
   Future<bool> _showSelecctionPage() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SelectionPage()),
-    );
+    final result = GeneralNavigator(context, SelectionPage()).navigate();
     return result;
   }
 
@@ -68,9 +62,14 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: 50.0,
       width: 150.0,
-      child: RaisedButton(
-        elevation: 9.0,
-        child: const Text('Authenticate'),
+      child: FlatButton(
+        child: const Text(
+          'Authenticate',
+          style: TextStyle(
+            fontSize: 20.0,
+            decoration: TextDecoration.underline,
+          ),
+        ),
         onPressed: () => _authenticate(),
       ),
     );
