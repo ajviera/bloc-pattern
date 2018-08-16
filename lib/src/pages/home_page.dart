@@ -27,7 +27,6 @@ class _HomePageState extends State<HomePage> {
       _changeText(result);
     } on PlatformException catch (e) {
       print(e);
-      _authWithPass();
     }
     if (!mounted) return;
   }
@@ -37,7 +36,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> _showSelecctionPage() async {
-    final result = GeneralNavigator(context, SelectionPage()).navigate();
+    // final result = GeneralNavigator(context, SelectionPage()).navigate();
+    final bool result = await Navigator.push(
+      this.context,
+      MaterialPageRoute(builder: (context) => SelectionPage()),
+    );
+
     return result;
   }
 
@@ -48,29 +52,31 @@ class _HomePageState extends State<HomePage> {
       child: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AuthStream(),
-            buildRaiseButton(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 180.0),
+              child: AuthStream(),
+            ),
+            buildRaiseButton('Biometric Authentication', () => _authenticate()),
+            buildRaiseButton('Password Authentication', () => _authWithPass()),
           ],
         ),
       ),
     );
   }
 
-  Container buildRaiseButton() {
+  Container buildRaiseButton(String text, VoidCallback funtion) {
     return Container(
-      height: 50.0,
-      width: 150.0,
       child: FlatButton(
-        child: const Text(
-          'Authenticate',
+        child: Text(
+          text,
           style: TextStyle(
             fontSize: 20.0,
             decoration: TextDecoration.underline,
           ),
         ),
-        onPressed: () => _authenticate(),
+        onPressed: funtion,
       ),
     );
   }

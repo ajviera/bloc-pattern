@@ -8,35 +8,38 @@ class SelectionPage extends StatelessWidget {
       onTap: () {
         SystemChannels.textInput.invokeMethod('TextInput.hide');
       },
-      child: Center(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 150.0, left: 20.0, right: 20.0),
-              child: Column(
-                children: <Widget>[
-                  TextField(
-                    autofocus: true,
-                    decoration: InputDecoration(
-                      labelText: 'Full Name',
-                      hintText: 'eg. Cosme Fulanito',
+      child: new Scaffold(
+        body: Center(
+          child: ListView(
+            children: <Widget>[
+              Container(
+                padding:
+                    const EdgeInsets.only(top: 150.0, left: 20.0, right: 20.0),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        hintText: 'eg. Cosme Fulanito',
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 100.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        flatButton(
-                            context, Text('Cancel'), Icons.cancel, false),
-                        flatButton(context, Text('Confirm'), Icons.done, true)
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 100.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          flatButton(
+                              context, Text('Cancel'), Icons.cancel, false),
+                          flatButton(context, Text('Confirm'), Icons.done, true)
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
