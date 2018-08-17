@@ -10,9 +10,16 @@ class AuthStream extends StatelessWidget {
     return StreamBuilder<bool>(
       stream: bloc.isLoading,
       initialData: true,
-      builder: (context, snapshot) => Text(
-            "Current State: ${snapshot.data ? authorized : notAuthorized}",
-            style: Theme.of(context).textTheme.headline,
+      builder: (context, snapshot) => Column(
+            children: <Widget>[
+              Text('Current State:'),
+              Text(
+                "${snapshot.data ? authorized : notAuthorized}",
+                style: TextStyle(
+                  fontSize: 23.0,
+                ),
+              ),
+            ],
           ),
     );
   }

@@ -26,12 +26,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: SafeArea(
-            child: Text(_title),
-          ),
+        // appBar: AppBar(
+        //   title: SafeArea(
+        //     child: Text(_title),
+        //   ),
+        // ),
+        body: HomePage(
+          primaryColor: Colors.red.shade300,
+          backgroundColor: Colors.white,
+          backgroundImage: AssetImage("assets/images/sakura-bloom.jpg"),
         ),
-        body: HomePage(),
       ),
     );
   }
