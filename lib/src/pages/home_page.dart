@@ -31,9 +31,7 @@ class _HomePageState extends State<HomePage> {
       );
 
       _changeText(result);
-    } on PlatformException catch (e) {
-      print(e);
-    }
+    } on PlatformException {}
     if (!mounted) return;
   }
 
@@ -72,7 +70,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             ClipPath(
-              clipper: MyClipper(),
+              clipper: Clipper(),
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -161,27 +159,5 @@ class _HomePageState extends State<HomePage> {
         onPressed: funtion,
       ),
     );
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path p = Path();
-    p.lineTo(size.width, 0.0);
-    p.lineTo(size.width, size.height * 0.85);
-    p.arcToPoint(
-      Offset(0.0, size.height * 0.85),
-      radius: const Radius.elliptical(40.0, 10.0),
-      rotation: 360.0,
-    );
-    p.lineTo(0.0, 0.0);
-    p.close();
-    return p;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper oldClipper) {
-    return true;
   }
 }
